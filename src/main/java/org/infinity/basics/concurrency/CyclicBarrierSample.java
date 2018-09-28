@@ -1,56 +1,35 @@
 package org.infinity.basics.concurrency;
 
-public class CyclicBarrierSample {
+import java.util.concurrent.CyclicBarrier;
 
+public class CyclicBarrierSample {
+    public static void main(String[] args) {
+        int N = 4;
+        CyclicBarrier barrier = new CyclicBarrier(N);
+        for (int i = 0; i < N; i++)
+            new Writer(barrier).start();
+    }
+
+    static class Writer extends Thread {
+        private CyclicBarrier cyclicBarrier;
+
+        public Writer(CyclicBarrier cyclicBarrier) {
+            this.cyclicBarrier = cyclicBarrier;
+        }
+
+        @Override
+        public void run() {
+            System.out.println("线程" + Thread.currentThread().getName() + "正在写入数据...");
+            try {
+                Thread.sleep(5000);      //以睡眠来模拟写入数据操作
+                System.out.println("线程" + Thread.currentThread().getName() + "写入数据完毕，等待其他线程写入完毕");
+                cyclicBarrier.await();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("所有线程写入完毕，继续处理其他任务...");
+        }
+    }
 }
 
-//class Solver {
-//    final int           N;
-//    final float[][]     data;
-//    final CyclicBarrier barrier;
-//
-//    class Worker implements Runnable {
-//        int myRow;
-//
-//        Worker(int row) {
-//            myRow = row;
-//        }
-//
-//        public void run() {
-//            while (!done()) {
-//                processRow(myRow);
-//
-//                try {
-//                    barrier.await();
-//                } catch (InterruptedException ex) {
-//                    return;
-//                } catch (BrokenBarrierException ex) {
-//                    return;
-//                }
-//            }
-//        }
-//    }
-//
-//    public Solver(float[][] matrix) {
-//        data = matrix;
-//        N = matrix.length;
-//        Runnable barrierAction =
-//                new Runnable() {
-//                    public void run() {
-//                        mergeRows();
-//                    }
-//                };
-//        barrier = new CyclicBarrier(N, barrierAction);
-//
-//        List<Thread> threads = new ArrayList<Thread>(N);
-//        for (int i = 0; i < N; i++) {
-//            Thread thread = new Thread(new Worker(i));
-//            threads.add(thread);
-//            thread.start();
-//        }
-//
-//        // wait until done
-//        for (Thread thread : threads)
-//            thread.join();
-//    }
-//}
+
