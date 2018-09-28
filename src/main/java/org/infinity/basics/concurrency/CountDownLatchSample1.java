@@ -2,7 +2,7 @@ package org.infinity.basics.concurrency;
 
 import java.util.concurrent.CountDownLatch;
 
-public class CountDownLatchSample {
+public class CountDownLatchSample1 {
 
     public static void main(String[] args) throws InterruptedException {
         int n = 2;
