@@ -1,6 +1,7 @@
 package org.infinity.basics.concurrency;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.IntStream;
 
 public class CountDownLatchSample1 {
 
@@ -9,8 +10,9 @@ public class CountDownLatchSample1 {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(n);
 
-        for (int i = 0; i < n; ++i) // create and start threads
-            new Thread(new Worker(startSignal, doneSignal)).start();
+        IntStream.range(0, n).forEach((i) -> {
+            new Thread(new Worker(startSignal, doneSignal), "Thread" + i).start();// create and start threads
+        });
 
         System.out.println("Do something else1");
         System.out.println("startSignal.countDown()");
@@ -32,10 +34,10 @@ class Worker implements Runnable {
 
     public void run() {
         try {
-            System.out.println("startSignal.await()");
+            System.out.println("startSignal.await() " + Thread.currentThread().getName());
             startSignal.await();
-            System.out.println("Do work");
-            System.out.println("doneSignal.countDown()");
+            System.out.println("Do work " + Thread.currentThread().getName());
+            System.out.println("doneSignal.countDown() " + Thread.currentThread().getName());
             doneSignal.countDown();
         } catch (InterruptedException ex) {
         } // return;
