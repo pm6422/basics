@@ -3,7 +3,7 @@ package org.infinity.basics.concurrency;
 import java.util.concurrent.Semaphore;
 
 /**
- * 假若一个工厂有5台机器，但是有8个工人，一台机器同时只能被一个工人使用，只有使用完了，其他工人才能继续使用
+ * 假若一个工厂有8个工人，但有5台机器，一台机器同时只能被一个工人使用，只有使用完了，其他工人才能继续使用
  */
 public class SemaphoreSample {
     public static void main(String[] args) {
