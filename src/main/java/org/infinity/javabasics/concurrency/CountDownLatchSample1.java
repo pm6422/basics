@@ -1,4 +1,4 @@
-package org.infinity.basics.concurrency;
+package org.infinity.javabasics.concurrency;
 
 import java.util.concurrent.CountDownLatch;
 
