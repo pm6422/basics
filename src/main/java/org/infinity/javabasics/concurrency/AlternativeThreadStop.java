@@ -1,6 +1,6 @@
 package org.infinity.javabasics.concurrency;
 
-public class AlternateStop implements Runnable {
+public class AlternativeThreadStop implements Runnable {
     private volatile boolean stopRequested;
     private          Thread  runThread;
 
@@ -28,7 +28,7 @@ public class AlternateStop implements Runnable {
     }
 
     public static void main(String[] args) {
-        AlternateStop as = new AlternateStop();
+        AlternativeThreadStop as = new AlternativeThreadStop();
         Thread t = new Thread(as);
         t.start();
         try {
