@@ -3,10 +3,10 @@ package org.infinity.javabasics.concurrency;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Test {
+public class ThreadPoolDemo {
 
     public static void main(String[] args) {
-        new Test().startTenThreads();
+        new ThreadPoolDemo().startTenThreads();
     }
 
     private ExecutorService executor = Executors.newFixedThreadPool(50);
