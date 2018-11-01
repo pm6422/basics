@@ -45,6 +45,7 @@ class CounterTask implements Runnable {
         System.out.println(Thread.currentThread().getName() + " - " + System.currentTimeMillis() + " is ready...");
         try {
             // 设置栅栏，使在此等待，到达位置的线程达到要求即可开启大门
+            // 其实可以使用thread.join()代替
             barrier.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
