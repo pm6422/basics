@@ -6,7 +6,6 @@ public class DoubleCountDownLatchDemo {
     public static void main(String[] args) throws InterruptedException {
         Runnable taskTemp = new Runnable() {
             private int iCounter;// 注意，此处是非线程安全的，留坑
-
             @Override
             public void run() {
                 for (int i = 0; i < 10; i++) {
