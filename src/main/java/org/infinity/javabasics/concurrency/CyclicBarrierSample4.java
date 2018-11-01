@@ -21,11 +21,11 @@ public class CyclicBarrierSample4 {
         latchTest.startNThreadsByBarrier(5, taskTemp);
     }
 
-    public void startNThreadsByBarrier(int threadNums, Runnable finishTask) throws InterruptedException {
-        // 设置栅栏解除时的动作，比如初始化某些值
-        CyclicBarrier barrier = new CyclicBarrier(threadNums, finishTask);
-        // 启动 n 个线程，与栅栏阀值一致，即当线程准备数达到要求时，栅栏刚好开启，从而达到统一控制效果
-        for (int i = 0; i < threadNums; i++) {
+    public void startNThreadsByBarrier(int threadNum, Runnable finishTask) throws InterruptedException {
+        // 启动threadNum个线程，与栅栏阀值一致，即当线程准备数达到要求时，栅栏便会打开，从而达到统一控制效果
+        // finishTask设置栅栏打开时的操作，比如初始化某些值
+        CyclicBarrier barrier = new CyclicBarrier(threadNum, finishTask);
+        for (int i = 0; i < threadNum; i++) {
             Thread.sleep(100);
             new Thread(new CounterTask(barrier)).start();
         }
