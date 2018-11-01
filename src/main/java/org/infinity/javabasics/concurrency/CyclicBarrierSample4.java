@@ -6,10 +6,8 @@ import java.util.concurrent.CyclicBarrier;
 // 与闭锁结构一致
 public class CyclicBarrierSample4 {
     public static void main(String[] args) throws InterruptedException {
-
         Runnable taskTemp = new Runnable() {
             private int iCounter;
-
             @Override
             public void run() {
                 // 发起请求
