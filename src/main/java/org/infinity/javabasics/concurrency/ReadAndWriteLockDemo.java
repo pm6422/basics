@@ -9,12 +9,25 @@ public class ReadAndWriteLockDemo {
     public static ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
-        // 多个线程同时写
+        // 多个线程写，同时只有一个线程可以写
         ExecutorService service = Executors.newCachedThreadPool();
         service.execute(new Runnable() {
             @Override
             public void run() {
                 writeFile(Thread.currentThread());
+            }
+        });
+        // 多个线程可以同时读
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                readFile(Thread.currentThread());
+            }
+        });
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                readFile(Thread.currentThread());
             }
         });
         service.execute(new Runnable() {
