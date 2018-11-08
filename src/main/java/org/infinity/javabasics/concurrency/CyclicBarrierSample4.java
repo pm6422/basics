@@ -23,7 +23,7 @@ public class CyclicBarrierSample4 {
 
     public void startNThreadsByBarrier(int threadNum, Runnable finishTask) throws InterruptedException {
         // 启动threadNum个线程，与栅栏阀值一致，即当线程准备数达到要求时，栅栏便会打开，从而达到统一控制效果
-        // finishTask设置栅栏打开时的操作，比如初始化某些值
+        // finishTask设置栅栏打开前的操作，比如初始化某些值
         CyclicBarrier barrier = new CyclicBarrier(threadNum, finishTask);
         for (int i = 0; i < threadNum; i++) {
             Thread.sleep(100);
