@@ -34,6 +34,7 @@ public class CyclicBarrierSample4 {
 }
 
 class CounterTask implements Runnable {
+
     // 传入栅栏，一般考虑更优雅方式
     private CyclicBarrier barrier;
 
@@ -46,6 +47,7 @@ class CounterTask implements Runnable {
         try {
             // 设置栅栏，使在此等待，到达位置的线程达到要求即可开启大门
             // 其实可以使用thread.join()代替
+
             barrier.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
