@@ -11,7 +11,9 @@ public class VolatileTest {
     }
 
     public void loop() {
-        while (b == 0) continue;
+        while (b == 0) {
+            continue;
+        }
         if (a == 1) {
             System.out.println("i'm here");
         } else {
