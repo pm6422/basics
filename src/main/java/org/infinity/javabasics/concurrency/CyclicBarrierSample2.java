@@ -7,7 +7,6 @@ public class CyclicBarrierSample2 {
     public static void main(String[] args) {
         int N = 4;
         CyclicBarrier barrier = new CyclicBarrier(N, new Runnable() {
-            @Override
             public void run() {
                 System.out.println("当前线程" + Thread.currentThread().getName());
             }
