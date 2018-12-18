@@ -11,7 +11,7 @@ public class DeadLockDemo {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
-                synchronized (lockB) {
+                synchronized (lockB) { //尽量避免在持有一个锁的同时去申请另一个锁
                 }
             }
         }, "ThreadA");
@@ -22,7 +22,7 @@ public class DeadLockDemo {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
-                synchronized (lockA) {
+                synchronized (lockA) { //尽量避免在持有一个锁的同时去申请另一个锁
                 }
             }
         }, "ThreadB");
