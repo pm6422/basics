@@ -1,8 +1,5 @@
 package org.infinity.javabasics.concurrency;
 
-/**
- * 注意使用Lock无法达到交替运行效果，只会达到一个线程执行完再执行下一个
- */
 public class ThreadAlternateRunDemo2 {
 
     private Object lock = new Object();

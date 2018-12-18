@@ -16,12 +16,12 @@ public class ThreadAlternateRunDemo3 {
 
         @Override
         public void run() {
-            for (int i = 0; i <= 100; ) {
+            for (int i = 0; i <= 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
                 if (evenFlag) {
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i = i + 2;
+                        i = i + 2;// 重点要把自增语句写在这里
                         evenFlag = false;
                     } finally {
                         lock.unlock();
@@ -44,7 +44,7 @@ public class ThreadAlternateRunDemo3 {
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i = i + 2;
+                        i = i + 2;// 重点要把自增语句写在这里
                         evenFlag = true;
                     } finally {
                         lock.unlock();
