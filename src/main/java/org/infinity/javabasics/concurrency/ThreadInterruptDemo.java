@@ -9,6 +9,8 @@ public class ThreadInterruptDemo {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            System.out.println("continue");
         });
 
         thread.start();
