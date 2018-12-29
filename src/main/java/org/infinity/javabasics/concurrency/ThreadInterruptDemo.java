@@ -14,6 +14,7 @@ public class ThreadInterruptDemo {
         });
 
         thread.start();
+        //睡眠一秒钟，保证线程thread阻塞在sleep方法
         Thread.sleep(100L);
         thread.interrupt();
     }

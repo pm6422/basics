@@ -11,6 +11,7 @@ public class LockSupportInterruptDemo {
                 LockSupport.park();
                 System.out.println("continue");
             } catch (Exception e) {
+                // interrupt后不会抛出异常
                 e.getStackTrace();
             }
         });
