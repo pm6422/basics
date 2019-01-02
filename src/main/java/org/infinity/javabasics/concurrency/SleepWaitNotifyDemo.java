@@ -33,6 +33,8 @@ public class SleepWaitNotifyDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                // 只有当执行唤醒工作的线程也就是调用object.notify()的线程离开同步块，即释放锁之后，被唤醒线程才能去竞争锁
             }
         }, "B").start();
     }
