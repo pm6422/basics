@@ -14,8 +14,8 @@ public class LockSupportDemo {
             System.out.println(sum);
         });
         a.start();
-        //睡眠一秒钟，保证线程a已经计算完成，阻塞在LockSupport.park()
-        Thread.sleep(1000);
+        // 不像object.wait()需要sleep，LockSupport就支持主线程先调用unpark后，线程A再调用park而不被阻塞
+        // Thread.sleep(1000);
         LockSupport.unpark(a);// 终止暂停，继续执行System.out.println(sum);
     }
 }
