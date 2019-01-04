@@ -10,14 +10,15 @@ public class LockUnlockInDifferentThreadsDemo {
 
         Thread thread1 = new Thread(() -> {
             lock.lock();
+            System.out.println("thread1");
         });
 
         thread1.start();
 
-
         Thread thread2 = new Thread(() -> {
             // java.lang.IllegalMonitorStateException
             lock.unlock();
+            System.out.println("thread2");
         });
 
         thread2.start();
