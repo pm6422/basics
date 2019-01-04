@@ -5,6 +5,7 @@ public class ThreadStopDemo {
     public static void main(String[] args) {
         StopThread thread = new StopThread();
         thread.start();
+        thread.start();
         try {
             //休眠1秒，确保i变量自增成功
             Thread.sleep(1000);
