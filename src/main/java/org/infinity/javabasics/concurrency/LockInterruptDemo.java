@@ -3,7 +3,7 @@ package org.infinity.javabasics.concurrency;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class LockInterrupt {
+public class LockInterruptDemo {
 
     public static void main(String[] args) throws InterruptedException {
         Lock lock = new ReentrantLock();

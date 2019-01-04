@@ -4,9 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SynchronizedCannotBeInterrupted {
 
-    private static Object lock = new Object();
-
     public static void main(String[] args) throws InterruptedException {
+        Object lock = new Object();
 
         Thread t = new Thread(() -> {
             synchronized (lock) {
