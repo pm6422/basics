@@ -1,10 +1,13 @@
 package org.infinity.javabasics.concurrency;
 
+/**
+ * 使用jps+jstack pid组合可以观察到死锁
+ */
 public class DeadLockDemo {
-    private static Object lockA = new Object();
-    private static Object lockB = new Object();
+    private Object lockA = new Object();
+    private Object lockB = new Object();
 
-    public static void main(String[] args) {
+    private void run() {
         Thread threadA = new Thread(() -> {
             synchronized (lockA) {
                 try {
@@ -29,5 +32,10 @@ public class DeadLockDemo {
 
         threadA.start();
         threadB.start();
+    }
+
+    public static void main(String[] args) {
+        DeadLockDemo demo = new DeadLockDemo();
+        demo.run();
     }
 }
