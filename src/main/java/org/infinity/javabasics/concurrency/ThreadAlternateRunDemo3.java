@@ -16,7 +16,7 @@ public class ThreadAlternateRunDemo3 {
     private void run() {
         Thread t1 = new Thread(() -> {
             for (int i = 0; i <= 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
-                if (evenFlag) {
+                if (evenFlag) {// evenFlag=false时会形成死循环，直到evenFlag=true
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
@@ -31,7 +31,7 @@ public class ThreadAlternateRunDemo3 {
 
         Thread t2 = new Thread(() -> {
             for (int i = 1; i <= 101; ) {
-                if (!evenFlag) {
+                if (!evenFlag) {// evenFlag=true时会形成死循环，直到evenFlag=false
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
