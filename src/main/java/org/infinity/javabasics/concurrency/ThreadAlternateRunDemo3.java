@@ -20,7 +20,7 @@ public class ThreadAlternateRunDemo3 {
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i = i + 2;// 重点要把自增语句写在这里
+                        i += 2;// 重点要把自增语句写在这里
                         evenFlag = false;
                     } finally {
                         lock.unlock();
@@ -35,7 +35,7 @@ public class ThreadAlternateRunDemo3 {
                     try {
                         lock.lock();
                         System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i = i + 2;// 重点要把自增语句写在这里
+                        i += 2;// 重点要把自增语句写在这里
                         evenFlag = true;
                     } finally {
                         lock.unlock();
