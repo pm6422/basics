@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ThreadAlternateRunDemo3 {
 
-    private boolean evenFlag = true;
+    private boolean evenFlag = true; // 起始于偶数
     private Lock    lock     = new ReentrantLock();
 
     public static void main(String[] args) {
