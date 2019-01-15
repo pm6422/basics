@@ -13,36 +13,35 @@ public class ThreadAlternateRunDemo3 {
     }
 
     private void run() {
-        Thread t1 = new Thread(() -> {
-            for (int i = 0; i <= 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
-                if (evenFlag) {// evenFlag=false时会形成死循环，直到evenFlag=true
-                    try {
-                        lock.lock();
-                        System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i += 2;// 重点要把自增语句写在这里
-                        evenFlag = false;
-                    } finally {
-                        lock.unlock();
+        class Task implements Runnable {
+            private int     startIndex;
+            private boolean target;
+
+            Task(int startIndex, boolean target) {
+                this.startIndex = startIndex;
+                this.target = target;
+            }
+
+            @Override
+            public void run() {
+                for (int i = startIndex; i <= startIndex + 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
+                    // XOR是异或运算，和target不一样的才为true，否则为false
+                    if (evenFlag ^ this.target) {// evenFlag=false时会形成死循环，直到evenFlag=true
+                        try {
+                            lock.lock();
+                            System.out.println(Thread.currentThread().getName() + ":" + i);
+                            i = i + 2;// 重点要把自增语句写在这里
+                            evenFlag = this.target;
+                        } finally {
+                            lock.unlock();
+                        }
                     }
                 }
             }
-        }, "偶");
+        }
 
-        Thread t2 = new Thread(() -> {
-            for (int i = 1; i <= 101; ) {
-                if (!evenFlag) {// evenFlag=true时会形成死循环，直到evenFlag=false
-                    try {
-                        lock.lock();
-                        System.out.println(Thread.currentThread().getName() + ":" + i);
-                        i += 2;// 重点要把自增语句写在这里
-                        evenFlag = true;
-                    } finally {
-                        lock.unlock();
-                    }
-                }
-            }
-        }, "奇");
-
+        Thread t1 = new Thread(new Task(0, false), "偶");
+        Thread t2 = new Thread(new Task(1, true), "奇");
         t1.start();
         t2.start();
     }
