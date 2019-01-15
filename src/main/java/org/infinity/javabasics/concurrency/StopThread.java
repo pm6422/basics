@@ -9,6 +9,7 @@ public class StopThread {
         public void execute(Runnable task) {
             executeThread = new Thread(() -> {
                 Thread daemonThread = new Thread(task);
+
                 daemonThread.setDaemon(true);// Set it as a daemon thread
                 daemonThread.start();
 

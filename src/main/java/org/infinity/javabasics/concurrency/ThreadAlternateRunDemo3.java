@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ThreadAlternateRunDemo3 {
 
     private boolean evenFlag = true;
-    private Lock    lock     = new ReentrantLock(true);
+    private Lock    lock     = new ReentrantLock();
 
     public static void main(String[] args) {
         new ThreadAlternateRunDemo3().run();
