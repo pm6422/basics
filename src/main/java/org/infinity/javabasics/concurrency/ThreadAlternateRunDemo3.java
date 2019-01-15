@@ -12,7 +12,6 @@ public class ThreadAlternateRunDemo3 {
         new ThreadAlternateRunDemo3().run();
     }
 
-
     private void run() {
         Thread t1 = new Thread(() -> {
             for (int i = 0; i <= 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
