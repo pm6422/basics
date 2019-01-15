@@ -36,8 +36,8 @@ public class ThreadAlternateRunDemo1 {
 
     private void run() {
         Object lock = new Object();
-        new EvenOddThread("EvenThread", lock, 0).start();
-        new EvenOddThread("OddThread", lock, 1).start();
+        new EvenOddThread("偶", lock, 0).start();
+        new EvenOddThread("基", lock, 1).start();
     }
 
 

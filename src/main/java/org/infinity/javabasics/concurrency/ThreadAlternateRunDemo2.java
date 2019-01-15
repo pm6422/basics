@@ -24,7 +24,7 @@ public class ThreadAlternateRunDemo2 {
                     }
                 }
             }
-        }, "threadEven");
+        }, "偶");
 
         Thread threadOdd = new Thread(() -> {
             for (int i = 1; i <= 101; i = i + 2) {
@@ -43,7 +43,7 @@ public class ThreadAlternateRunDemo2 {
                     }
                 }
             }
-        }, "ThreadOdd");
+        }, "奇");
 
 
         threadEven.start();
