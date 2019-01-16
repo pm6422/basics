@@ -5,10 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author zj
- * <p>
- * Exchanger用于实现两个人之间的数据交换，每个人在完成一定的事物后想与对方交换数据，第一个先拿出数据的人将
- * 一直等待第二个人拿着数据来到时，才能彼此交换数据。
+ * Exchanger用于实现两个线程之间的数据交换，每个线程在完成一定的事物后想与对方交换数据，第一个先拿出数据的线程将一直等待第二个线程拿着数据来到时，才能彼此交换数据。
  */
 public class ExchangerDemo {
     public static void main(String[] args) {

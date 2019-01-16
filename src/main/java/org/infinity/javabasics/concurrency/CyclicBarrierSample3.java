@@ -18,6 +18,7 @@ public class CyclicBarrierSample3 {
             e.printStackTrace();
         }
 
+        // reset
         System.out.println("CyclicBarrier重用");
 
         for (int i = 0; i < N; i++) {
