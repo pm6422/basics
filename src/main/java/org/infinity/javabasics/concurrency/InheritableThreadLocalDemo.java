@@ -1,9 +1,8 @@
 package org.infinity.javabasics.concurrency;
 
 public class InheritableThreadLocalDemo {
-    private ThreadLocal<String> threadLocal = new ThreadLocal<>();
-
     private InheritableThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
+    private ThreadLocal<String>            threadLocal            = new ThreadLocal<>();
 
     public static void main(String[] args) throws InterruptedException {
         InheritableThreadLocalDemo demo = new InheritableThreadLocalDemo();
