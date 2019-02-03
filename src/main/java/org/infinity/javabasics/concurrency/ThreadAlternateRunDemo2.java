@@ -9,7 +9,7 @@ public class ThreadAlternateRunDemo2 {
     }
 
     private void run() {
-        Thread threadEven = new Thread(() -> {
+        Thread evenThread = new Thread(() -> {
             for (int i = 0; i <= 100; i = i + 2) {
                 synchronized (lock) {// 通过synchronized抢先获得到锁的线程进入RUNNABLE状态，未获得锁的处于BLOCKED状态
                     System.out.println(Thread.currentThread().getName() + "->" + i);
@@ -26,12 +26,14 @@ public class ThreadAlternateRunDemo2 {
             }
         }, "偶");
 
-        Thread threadOdd = new Thread(() -> {
+        Thread oddThread = new Thread(() -> {
             for (int i = 1; i <= 101; i = i + 2) {
                 synchronized (lock) {
                     System.out.println(Thread.currentThread().getName() + "->" + i);
                     System.out.println(Thread.currentThread().getName() + " notify");
+                    System.out.println("Even thread state before notify: " + evenThread.getState());
                     lock.notify();
+                    System.out.println("Even thread state after notify: " + evenThread.getState());
                     try {
                         if (i < 101) {
                             System.out.println(Thread.currentThread().getName() + " wait");
@@ -45,8 +47,7 @@ public class ThreadAlternateRunDemo2 {
             }
         }, "奇");
 
-
-        threadEven.start();
-        threadOdd.start();
+        evenThread.start();
+        oddThread.start();
     }
 }
