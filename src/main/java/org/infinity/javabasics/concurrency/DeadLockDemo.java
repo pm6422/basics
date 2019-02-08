@@ -1,7 +1,10 @@
 package org.infinity.javabasics.concurrency;
 
+import org.infinity.javabasics.utils.Utils;
+
 /**
- * 使用jps+jstack pid组合可以观察到死锁
+ * 使用jps+jstack PID组合可以观察到死锁
+ * 使用kill -3 PID也可以在控制台看到死锁信息
  */
 public class DeadLockDemo {
     private Object lockA = new Object();
@@ -37,5 +40,6 @@ public class DeadLockDemo {
     public static void main(String[] args) {
         DeadLockDemo demo = new DeadLockDemo();
         demo.run();
+        System.out.println("PID:" + Utils.getPid());
     }
 }
