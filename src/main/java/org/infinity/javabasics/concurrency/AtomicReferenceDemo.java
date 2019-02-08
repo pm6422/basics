@@ -11,8 +11,9 @@ public class AtomicReferenceDemo {
     public static void main(String[] args) throws InterruptedException {
         AtomicReference<Integer> atomicUserReference = new AtomicReference<>(new Integer(0));
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(1000);
-        IntStream.range(0, 1000).forEach(x -> threadPool.execute(new Task(atomicUserReference)));
+        int threadPoolSize = 1000;
+        ExecutorService threadPool = Executors.newFixedThreadPool(threadPoolSize);
+        IntStream.range(0, threadPoolSize).forEach(x -> threadPool.execute(new Task(atomicUserReference)));
         threadPool.shutdown();
 
 //        while (true) {
