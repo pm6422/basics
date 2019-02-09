@@ -15,7 +15,7 @@ public class ThreadAlternateRunDemo1 {
 
         @Override
         public void run() {
-            for (int i = startIndex; i <= 100; i = i + 2) {
+            for (int i = startIndex; i <= 100000000000000L; i = i + 2) {
                 synchronized (lock) {// 通过synchronized抢先获得到锁的线程进入RUNNABLE状态，未获得锁的处于BLOCKED状态
                     System.out.println(Thread.currentThread().getName() + "->" + i);
 //                    System.out.println(Thread.currentThread().getName() + " notify");
