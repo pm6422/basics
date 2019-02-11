@@ -66,7 +66,6 @@ public class EmployeeSoftReferenceCache {
         }
 
         return em;
-
     }
 
 // 清除那些所软引用的 Employee对象已经被回收的EmployeeRef对象
