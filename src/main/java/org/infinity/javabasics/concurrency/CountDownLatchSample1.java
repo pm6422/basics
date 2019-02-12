@@ -12,8 +12,9 @@ public class CountDownLatchSample1 {
                 try {
                     System.out.println("子线程" + Thread.currentThread().getName() + "正在执行");
                     Thread.sleep(3000);
-                    System.out.println("子线程" + Thread.currentThread().getName() + "执行完毕");
+                    System.out.println("子线程" + Thread.currentThread().getName() + "运行中");
                     latch.countDown();
+                    System.out.println("子线程" + Thread.currentThread().getName() + "还在运行中");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -27,8 +28,9 @@ public class CountDownLatchSample1 {
                 try {
                     System.out.println("子线程" + Thread.currentThread().getName() + "正在执行");
                     Thread.sleep(5000);
-                    System.out.println("子线程" + Thread.currentThread().getName() + "执行完毕");
+                    System.out.println("子线程" + Thread.currentThread().getName() + "运行中");
                     latch.countDown();
+                    System.out.println("子线程" + Thread.currentThread().getName() + "还在运行中");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
