@@ -24,9 +24,9 @@ public class ThreadAlternateRunDemo3 {
 
             @Override
             public void run() {
-                for (int i = startIndex; i <= startIndex + 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
-                    // XOR是异或运算，和target不一样的才为true，否则为false
-                    if (evenFlag ^ this.opposite) {// evenFlag=false时会形成死循环，直到evenFlag=true
+                for (int i = startIndex; i <= startIndex + 100; ) { // 第三个statement为空时，if条件为false时形成了死循环，直到另外线程获得到锁后修改条件为true。
+                    // XOR是异或运算，操作数不同时为true，否则为false
+                    if (evenFlag ^ this.opposite) {
                         try {
                             lock.lock();
                             System.out.println(Thread.currentThread().getName() + ":" + i);
