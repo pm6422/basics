@@ -15,23 +15,23 @@ public class ThreadAlternateRunDemo3 {
     private void run() {
         class Task implements Runnable {
             private int     startIndex;
-            private boolean target;
+            private boolean opposite;
 
-            Task(int startIndex, boolean target) {
+            Task(int startIndex, boolean opposite) {
                 this.startIndex = startIndex;
-                this.target = target;
+                this.opposite = opposite;
             }
 
             @Override
             public void run() {
                 for (int i = startIndex; i <= startIndex + 100; ) { // 第三个statement为空时，evenFlag又为false时形成了死循环，直到另外线程获得到锁后修改evenFlag为true。
                     // XOR是异或运算，和target不一样的才为true，否则为false
-                    if (evenFlag ^ this.target) {// evenFlag=false时会形成死循环，直到evenFlag=true
+                    if (evenFlag ^ this.opposite) {// evenFlag=false时会形成死循环，直到evenFlag=true
                         try {
                             lock.lock();
                             System.out.println(Thread.currentThread().getName() + ":" + i);
                             i += 2;// 重点要把自增语句写在这里
-                            evenFlag = this.target;
+                            evenFlag = this.opposite;
                         } finally {
                             lock.unlock();
                         }
