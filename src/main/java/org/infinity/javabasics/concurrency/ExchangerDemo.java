@@ -10,7 +10,8 @@ import java.util.concurrent.Executors;
 public class ExchangerDemo {
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newCachedThreadPool();
-        final Exchanger exchanger = new Exchanger();
+        Exchanger exchanger = new Exchanger();
+
         threadPool.execute(() -> {
             String data1 = "Elana";
             String data2 = "";
@@ -27,6 +28,7 @@ public class ExchangerDemo {
             }
             System.out.println("线程" + Thread.currentThread().getName() + "换回的数据为" + data2);
         });
+
         threadPool.execute(() -> {
             String data2 = "Damon";
             String data1 = "";
