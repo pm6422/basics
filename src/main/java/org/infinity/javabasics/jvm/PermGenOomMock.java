@@ -6,6 +6,9 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * VM Options: -XX:MetaspaceSize=8m -XX:MaxMetaspaceSize=8M
+ */
 public class PermGenOomMock {
     public static void main(String[] args) {
         URL url = null;
@@ -16,7 +19,7 @@ public class PermGenOomMock {
             while (true) {
                 ClassLoader loader = new URLClassLoader(urls);
                 classLoaderList.add(loader);
-                loader.loadClass("org.infinity.javabasics.jvm.PermGenOomMock");
+                loader.loadClass("org.infinity.javabasics.jvm.Employee");
             }
         } catch (Exception e) {
             e.printStackTrace();
