@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * VM Options: -XX:MetaspaceSize=8m -XX:MaxMetaspaceSize=8M
+ * 参数好像不起作用
  */
 public class PermGenOomMock {
     public static void main(String[] args) {
