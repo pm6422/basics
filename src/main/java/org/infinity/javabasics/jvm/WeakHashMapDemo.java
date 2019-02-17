@@ -15,6 +15,6 @@ public class WeakHashMapDemo {
         employee = null;
         System.gc();
         TimeUnit.SECONDS.sleep(2);
-        System.out.println(map.size());
+        System.out.println(map.size()); // 输出0
     }
 }
