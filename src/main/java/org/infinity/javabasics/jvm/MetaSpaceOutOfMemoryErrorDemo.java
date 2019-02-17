@@ -10,12 +10,12 @@ import java.util.List;
  * VM Options: -XX:MetaspaceSize=8m -XX:MaxMetaspaceSize=8M
  * 参数好像不起作用
  */
-public class PermGenOomMock {
+public class MetaSpaceOutOfMemoryErrorDemo {
     public static void main(String[] args) {
         URL url = null;
         List<ClassLoader> classLoaderList = new ArrayList<>();
         try {
-            url = new File("/tmp").toURI().toURL();
+            url = new File("/Users/louis/Workspace/Experiment/java-basics/target/classes/org/infinity/javabasics/jvm/").toURI().toURL();
             URL[] urls = {url};
             while (true) {
                 ClassLoader loader = new URLClassLoader(urls);
@@ -23,6 +23,7 @@ public class PermGenOomMock {
                 loader.loadClass("org.infinity.javabasics.jvm.Employee");
             }
         } catch (Exception e) {
+            System.out.println("ee");
             e.printStackTrace();
         }
     }
