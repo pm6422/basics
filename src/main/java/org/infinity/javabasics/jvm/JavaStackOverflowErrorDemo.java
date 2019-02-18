@@ -1,6 +1,6 @@
 package org.infinity.javabasics.jvm;
 
-public class StackOverflowErrorDemo {
+public class JavaStackOverflowErrorDemo {
     private static int index = 1;
 
     public void call() {
@@ -9,7 +9,7 @@ public class StackOverflowErrorDemo {
     }
 
     public static void main(String[] args) {
-        StackOverflowErrorDemo mock = new StackOverflowErrorDemo();
+        JavaStackOverflowErrorDemo mock = new JavaStackOverflowErrorDemo();
         try {
             mock.call();
         } catch (Throwable e) {
