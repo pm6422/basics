@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * VM Options: -Xmx8m
+ * VM Options: -Xmx8m -XX:+HeapDumpOnOutOfMemoryError
  */
 public class HeapOutOfMemoryErrorDemo {
     public static void main(String[] args) {
