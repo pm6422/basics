@@ -9,12 +9,7 @@ public class NativeMethodStackOverflowErrorDemo {
 
     public void createThread() {
         while (true) {
-            Thread thread = new Thread(new Runnable() {
-                public void run() {
-                    runAlways();
-                }
-
-            });
+            Thread thread = new Thread(() -> runAlways());
             thread.start();
         }
     }
