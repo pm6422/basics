@@ -3,7 +3,6 @@ package org.infinity.javabasics.jvm;
 public class NativeMethodStackOverflowErrorDemo {
     private void runAlways() {
         while (true) {
-
         }
     }
 
