@@ -1,5 +1,8 @@
 package org.infinity.javabasics.jvm;
 
+/**
+ * 程序会使整台电脑无任何响应，但看不到效果
+ */
 public class NativeMethodStackOverflowErrorDemo {
     private void runAlways() {
         while (true) {
