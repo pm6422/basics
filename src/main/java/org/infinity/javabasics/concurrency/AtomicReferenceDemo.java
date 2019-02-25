@@ -23,7 +23,8 @@ public class AtomicReferenceDemo {
 //            }
 //        }
 
-        if (threadPool.awaitTermination(2, TimeUnit.SECONDS)) {
+        // Blocks until all tasks have completed execution after a shutdown request
+        if (threadPool.awaitTermination(1, TimeUnit.HOURS)) {
             System.out.println(threadPool.isTerminated());
             System.out.println(atomicUserReference.get());
         }
