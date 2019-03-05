@@ -19,5 +19,7 @@ public class ThreadPoolExecutorDemo2 {
                 throw new Exception();
             });
         }
+
+        threadPool.shutdown();
     }
 }
