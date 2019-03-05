@@ -15,7 +15,7 @@ public class InheritableThreadLocalDemo {
         Thread thread = new Thread(() -> {
             System.out.println("子线程获取到主线程的值为：" + inheritableThreadLocal.get());
             System.out.println("获取不到主线程的值：" + threadLocal.get());
-        });
+        }, "childThread");
         thread.start();
         thread.join();
     }
