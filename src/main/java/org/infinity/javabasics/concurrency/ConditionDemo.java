@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConditionDemo {
     private Lock      lock      = new ReentrantLock();
-    private Condition condition = lock.newCondition();
+    private Condition condition = lock.newCondition();// 通过锁调用newCondition()来创建出Condition
 
     public static void main(String[] args) throws Exception {
         ConditionDemo demo = new ConditionDemo();
