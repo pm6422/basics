@@ -23,8 +23,12 @@ public class HashCodeAndEqualsDemo1 {
             this.age = age;
         }
 
+        @Override
         public String toString() {
-            return name + " - " + age;
+            return "Person{" +
+                    "age=" + age +
+                    ", name='" + name + '\'' +
+                    '}';
         }
 
         @Override
