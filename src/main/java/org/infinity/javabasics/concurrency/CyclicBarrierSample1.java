@@ -6,11 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 public class CyclicBarrierSample1 {
     public static void main(String[] args) {
         int N = 4;
-        CyclicBarrier barrier = new CyclicBarrier(N, new Runnable() {
-            public void run() {
-                System.out.println("当前线程" + Thread.currentThread().getName());
-            }
-        });
+        CyclicBarrier barrier = new CyclicBarrier(N, () -> System.out.println("当前线程" + Thread.currentThread().getName()));
         for (int i = 0; i < N; i++) {
             new Writer(barrier).start();
         }
