@@ -10,22 +10,26 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
- * 优化方式使用线程池处理，参考ThreadPoolServer
+ * ThreadPoolExecutor使用一个队列来保存等待处理的请求，固定大小线程池默认使用无限制的链表。注意，这又可能引起资源耗尽问题，因此最好限制下工作队列的大小。
+ * 优化方式使用固定工作队列的线程池处理，参考FixedWorkQueueThreadPoolServer
+ *
  */
-public class MultithreadHandleServer {
-
+public class ThreadPoolServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(MultithreadHandleServer.class);
 
     final static String response = "HTTP/1.0 200 OK\r\n" + "Content-type: text/plain\r\n" + "\r\n” +“Hello World\r\n";
 
     public static void main(String[] args) throws IOException {
-        ServerSocket listener = new ServerSocket(7020);
+        ServerSocket listener = new ServerSocket(7030);
+        ExecutorService threadPool = Executors.newFixedThreadPool(4);
         try {
             while (true) {
                 Socket socket = listener.accept();// 通过创建新的线程，主线程可以继续接受新的TCP连接，且这些信求可以并行的处理
-                new Thread(new HandleRequestRunnable(socket)).start();//一旦TCP连接建立之后，将会创建一个新的线程来处理新的请求，既在新的线程中执行前文中的handleRequest方法。
+                threadPool.submit(new HandleRequestRunnable(socket));
             }
         } finally {
             listener.close();
@@ -62,5 +66,3 @@ public class MultithreadHandleServer {
         }
     }
 }
-
-

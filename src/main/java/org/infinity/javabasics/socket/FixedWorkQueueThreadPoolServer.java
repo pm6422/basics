@@ -10,27 +10,36 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
-/**
- * 优化方式使用线程池处理，参考ThreadPoolServer
- */
-public class MultithreadHandleServer {
-
+public class FixedWorkQueueThreadPoolServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(MultithreadHandleServer.class);
 
     final static String response = "HTTP/1.0 200 OK\r\n" + "Content-type: text/plain\r\n" + "\r\n” +“Hello World\r\n";
 
     public static void main(String[] args) throws IOException {
-        ServerSocket listener = new ServerSocket(7020);
+        ServerSocket listener = new ServerSocket(7030);
+        ExecutorService threadPool = newBoundedFixedThreadPool(4, 16);
         try {
             while (true) {
                 Socket socket = listener.accept();// 通过创建新的线程，主线程可以继续接受新的TCP连接，且这些信求可以并行的处理
-                new Thread(new HandleRequestRunnable(socket)).start();//一旦TCP连接建立之后，将会创建一个新的线程来处理新的请求，既在新的线程中执行前文中的handleRequest方法。
+                threadPool.submit(new HandleRequestRunnable(socket));
             }
         } finally {
             listener.close();
         }
     }
+
+    static ExecutorService newBoundedFixedThreadPool(int nThreads, int capacity) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>(capacity),
+                new ThreadPoolExecutor.DiscardPolicy());
+    }
+
 
     static class HandleRequestRunnable implements Runnable {
         final Socket socket;
@@ -62,5 +71,3 @@ public class MultithreadHandleServer {
         }
     }
 }
-
-
