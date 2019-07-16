@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * Web服务的基础是套接字（socket），套接字负责监听端口，等待TCP连接，并接受TCP连接。一旦TCP连接被接受，即可从新创建的TCP连接中读取和发送数据
+ *
+ * 输入测试 http://localhost:9080
  */
 public class SingleThreadServer {
 
@@ -21,9 +23,9 @@ public class SingleThreadServer {
     final static String response = "HTTP/1.0 200 OK\r\n" + "Content-type: text/plain\r\n" + "\r\n” +“Hello World\r\n";
 
     public static void main(String[] args) throws IOException {
-        ServerSocket listener = new ServerSocket(9080);// 创建了一个服务端套接字(ServerSocket)，监听9080端口
+        ServerSocket listener = new ServerSocket(7010);// 创建了一个服务端套接字(ServerSocket)，监听7010端口
         try {
-            while (true) { // 循环检查这个套接字，查看是否有新的连接
+            while (true) {// 循环检查这个套接字，查看是否有新的连接
                 Socket socket = listener.accept();// 只有一个线程来处理请求，每个请求都必须等待前一个请求处理完成之后才能够被响应
                 try {
                     handleRequest(socket);
