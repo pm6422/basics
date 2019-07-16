@@ -11,7 +11,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+ * 优化方式使用线程池处理
+ */
 public class MultithreadHandleServer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MultithreadHandleServer.class);
@@ -22,8 +24,8 @@ public class MultithreadHandleServer {
         ServerSocket listener = new ServerSocket(7020);
         try {
             while (true) {
-                Socket socket = listener.accept();
-                new Thread(new HandleRequestRunnable(socket)).start();
+                Socket socket = listener.accept();// 通过创建新的线程，主线程可以继续接受新的TCP连接，且这些信求可以并行的处理
+                new Thread(new HandleRequestRunnable(socket)).start();//一旦TCP连接建立之后，将会创建一个新的线程来处理新的请求，既在新的线程中执行前文中的handleRequest方法。
             }
         } finally {
             listener.close();

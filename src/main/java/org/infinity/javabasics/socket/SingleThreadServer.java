@@ -15,6 +15,8 @@ import java.nio.charset.StandardCharsets;
  * Web服务的基础是套接字（socket），套接字负责监听端口，等待TCP连接，并接受TCP连接。一旦TCP连接被接受，即可从新创建的TCP连接中读取和发送数据
  *
  * 输入测试 http://localhost:9080
+ *
+ * 优化方式使用多线程处理，参考MultithreadHandleServer
  */
 public class SingleThreadServer {
 
