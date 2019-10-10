@@ -1,6 +1,6 @@
 package org.infinity.javabasics.io;
 
-public class CloneDemo {
+public class ShadowCloneDemo {
     public static void main(String[] args) throws CloneNotSupportedException {
         Dog dog = new Dog();
         dog.name = "旺财";
