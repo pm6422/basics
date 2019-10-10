@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 // JDK代理类
-public class AnimalProxy implements InvocationHandler {
+public class JdkProxy implements InvocationHandler {
 
     private Object target; // 代理对象
 
@@ -25,7 +25,7 @@ public class AnimalProxy implements InvocationHandler {
 
     public static void main(String[] args) {
         // JDK 动态代理调用
-        AnimalProxy proxy = new AnimalProxy();
+        JdkProxy proxy = new JdkProxy();
         Animal dogProxy = (Animal) proxy.getInstance(new Dog());
         dogProxy.eat();
     }
