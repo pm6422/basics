@@ -7,7 +7,8 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 public class CglibProxy implements MethodInterceptor {
-    private Object target; // 代理对象
+
+    private Object target; //代理对象
 
     public Object getInstance(Object target) {
         this.target = target;
@@ -20,6 +21,7 @@ public class CglibProxy implements MethodInterceptor {
         return enhancer.create();
     }
 
+    @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("调用前");
         Object result = methodProxy.invokeSuper(o, objects); // 执行方法调用
