@@ -40,7 +40,6 @@ public class FixedWorkQueueThreadPoolServer {
                 new ThreadPoolExecutor.DiscardPolicy());
     }
 
-
     static class HandleRequestRunnable implements Runnable {
         final Socket socket;
 
