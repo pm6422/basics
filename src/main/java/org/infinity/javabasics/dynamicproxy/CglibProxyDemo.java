@@ -6,7 +6,7 @@ import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
-public class CglibProxy implements MethodInterceptor {
+public class CglibProxyDemo implements MethodInterceptor {
 
     private Object target; //代理对象
 
@@ -31,7 +31,7 @@ public class CglibProxy implements MethodInterceptor {
 
     public static void main(String[] args) {
         // cglib 动态代理调用
-        CglibProxy proxy = new CglibProxy();
+        CglibProxyDemo proxy = new CglibProxyDemo();
         Panda panda = (Panda) proxy.getInstance(new Panda());
         panda.eat();
     }
