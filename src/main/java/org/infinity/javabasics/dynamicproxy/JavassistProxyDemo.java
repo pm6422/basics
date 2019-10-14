@@ -5,7 +5,7 @@ import javassist.*;
 public class JavassistProxyDemo {
 
     /**
-     * 创建一个Person对象
+     * 创建一个Person类
      *
      * @throws Exception
      */
