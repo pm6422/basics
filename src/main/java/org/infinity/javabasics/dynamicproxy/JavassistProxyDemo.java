@@ -48,11 +48,7 @@ public class JavassistProxyDemo {
         cc.writeFile("/Users/louis/Workspace/Experiment/java-basics/src/main/java/");
     }
 
-    public static void main(String[] args) {
-        try {
-            createPerson();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws Exception {
+        createPerson();
     }
 }
