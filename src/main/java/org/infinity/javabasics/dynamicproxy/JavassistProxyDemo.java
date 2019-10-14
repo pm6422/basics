@@ -23,7 +23,7 @@ public class JavassistProxyDemo {
         // 初始值是 "xiaoming"
         cc.addField(param, CtField.Initializer.constant("xiaoming"));
 
-        // 3. 生成 getter、setter 方法
+        // 3. 生成getter、setter方法
         cc.addMethod(CtNewMethod.setter("setName", param));
         cc.addMethod(CtNewMethod.getter("getName", param));
 
