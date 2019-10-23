@@ -14,7 +14,7 @@ public class LockInterruptDemo {
             try {
                 lock.lockInterruptibly(); // main线程占用锁后无法继续执行直到t1发生中断抛出InterruptedException才可以继续执行
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println(Thread.currentThread().getName() + " exception thrown.");
             }
             System.out.println(Thread.currentThread().getName() + " interrupted.");
         }, "t1");
@@ -23,7 +23,7 @@ public class LockInterruptDemo {
             try {
                 lock.lock();// main线程占用锁后无法继续执行
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(Thread.currentThread().getName() + " exception thrown.");
             }
             System.out.println(Thread.currentThread().getName() + " interrupted.");
         }, "t2");
