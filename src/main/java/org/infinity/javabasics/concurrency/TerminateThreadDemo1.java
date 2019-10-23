@@ -1,6 +1,6 @@
 package org.infinity.javabasics.concurrency;
 
-public class StopThreadDemo1 implements Runnable {
+public class TerminateThreadDemo1 implements Runnable {
     // 用于停止线程，volatile保证可见性
     private volatile boolean stopRequested;
 
@@ -25,7 +25,7 @@ public class StopThreadDemo1 implements Runnable {
     }
 
     public static void main(String[] args) {
-        StopThreadDemo1 demo = new StopThreadDemo1();
+        TerminateThreadDemo1 demo = new TerminateThreadDemo1();
         Thread t = new Thread(demo);
         t.start();
         try {
