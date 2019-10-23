@@ -7,9 +7,10 @@ public class ThreadInterruptDemo {
             try {
                 Thread.currentThread().sleep(10000L);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("exception thrown");
             }
 
+            System.out.println("state: " + Thread.currentThread().getState().name());
             System.out.println("continue");
             System.out.println("interrupted: " + Thread.currentThread().isInterrupted());
         });
