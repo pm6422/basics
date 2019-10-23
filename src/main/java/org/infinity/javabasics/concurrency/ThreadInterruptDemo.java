@@ -11,6 +11,7 @@ public class ThreadInterruptDemo {
             }
 
             System.out.println("continue");
+            System.out.println("interrupted: " + Thread.currentThread().isInterrupted());
         });
 
         thread.start();
