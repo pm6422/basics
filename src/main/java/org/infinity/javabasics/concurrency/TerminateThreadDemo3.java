@@ -1,6 +1,6 @@
 package org.infinity.javabasics.concurrency;
 
-public class StopThread {
+public class TerminateThreadDemo3 {
 
     private static class ExecutorService {
         private Thread  executeThread;
