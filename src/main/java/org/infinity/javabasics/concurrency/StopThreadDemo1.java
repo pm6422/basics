@@ -1,11 +1,11 @@
 package org.infinity.javabasics.concurrency;
 
-public class AlternativeThreadStop implements Runnable {
+public class StopThreadDemo1 implements Runnable {
+    // 用于停止线程，volatile保证可见性
     private volatile boolean stopRequested;
-    private          Thread  runThread;
 
+    @Override
     public void run() {
-        runThread = Thread.currentThread();
         stopRequested = false;
         int count = 0;
         while (!stopRequested) {
@@ -20,22 +20,19 @@ public class AlternativeThreadStop implements Runnable {
         System.out.println("Stopped");
     }
 
-    public void stopRequest() {
+    public void requestStop() {
         stopRequested = true;
-        if (runThread != null) {
-//            runThread.interrupt();
-        }
     }
 
     public static void main(String[] args) {
-        AlternativeThreadStop as = new AlternativeThreadStop();
-        Thread t = new Thread(as);
+        StopThreadDemo1 demo = new StopThreadDemo1();
+        Thread t = new Thread(demo);
         t.start();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException x) {
-            // ignore
+            // Leave blank intentionally
         }
-        as.stopRequest();
+        demo.requestStop();
     }
 }
