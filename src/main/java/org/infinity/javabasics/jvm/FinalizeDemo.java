@@ -1,5 +1,8 @@
 package org.infinity.javabasics.jvm;
 
+/**
+ * jstat命令可以查看到回收信息以及输出的日志
+ */
 public class FinalizeDemo {
 
     private static Block holder = null;
