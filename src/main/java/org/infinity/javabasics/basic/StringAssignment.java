@@ -9,6 +9,7 @@ public class StringAssignment {
     }
 
     private static void changeString(String s) {
+        // String是标准的不可变类(immutable)，对它的任何修改就是创建了一个新对象，再把引用指向该对象。
         s = "abc";
     }
 }
