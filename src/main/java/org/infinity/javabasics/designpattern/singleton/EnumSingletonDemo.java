@@ -1,6 +1,6 @@
 package org.infinity.javabasics.designpattern.singleton;
 
-enum EnumSingletonDemo {
+public enum EnumSingletonDemo {
     INSTANCE;
 
     public void meth() {
