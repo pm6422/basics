@@ -43,7 +43,7 @@ public class BubbleSort {
                 }
                 complexity++;
             }
-            if (isSorted) { // 提前排好序，直接退出大循环
+            if (isSorted) { // 提前排好序，不需要继续比较，直接退出大循环
                 break;
             }
         }
