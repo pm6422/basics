@@ -3,6 +3,8 @@ package org.infinity.javabasics.concurrency;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 /**
  * 在step1跟step2中，都只是调用ConcurrentHashMap的方法，各自都是原子操作，是线程安全的。
@@ -12,20 +14,40 @@ import java.util.concurrent.Executors;
  */
 public class ConcurrentHashMapThreadSafeIssueDemo {
     public static void main(String[] args) throws InterruptedException {
-        ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
-        map.put("key", 0);
+        ConcurrentHashMap<String, Integer> map1 = new ConcurrentHashMap<>();
+        map1.put("key", 0);
 
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
-        for (int i = 0; i < 1000; i++) {
-            executorService.execute(() -> {
-                int key = map.get("key") + 1; //step 1: single atomic operation is thread safe
-                map.put("key", key); //step 2: single atomic operation is thread safe
+        ExecutorService threadPool1 = Executors.newFixedThreadPool(8);
+        IntStream.range(0, 1000).forEach(i -> {
+            threadPool1.execute(() -> {
+                int key = map1.get("key") + 1; //step 1: single atomic operation is thread safe
+                map1.put("key", key); //step 2: single atomic operation is thread safe
                 // but two steps composition is not thread safe
             });
+        });
+        threadPool1.shutdown();
+        if (threadPool1.awaitTermination(1, TimeUnit.HOURS)) {
+            // 预期结果为1000，但是多次执行可以发现每次结果都不一样，说明非线程安全
+            System.out.println("------" + map1.get("key") + "------");
         }
-        Thread.sleep(3000); //模拟等待执行结束
-        // 预期结果为1000，但是多次执行可以发现每次结果都不一样，说明非线程安全
-        System.out.println("------" + map.get("key") + "------");
-        executorService.shutdown();
+
+        ConcurrentHashMap<String, Integer> map2 = new ConcurrentHashMap<>();
+        map2.put("key", 0);
+
+        ExecutorService threadPool2 = Executors.newFixedThreadPool(8);
+        IntStream.range(0, 1000).forEach(i -> {
+            threadPool2.execute(() -> {
+                // make it thread safe
+                synchronized (ConcurrentHashMapThreadSafeIssueDemo.class) {
+                    int key = map2.get("key") + 1;
+                    map2.put("key", key);
+                }
+            });
+        });
+        threadPool2.shutdown();
+        if (threadPool2.awaitTermination(1, TimeUnit.HOURS)) {
+            // 预期结果为1000，但是多次执行可以发现每次结果都不一样，说明非线程安全
+            System.out.println("------" + map2.get("key") + "------");
+        }
     }
 }
