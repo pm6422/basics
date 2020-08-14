@@ -46,7 +46,7 @@ public class ConcurrentHashMapThreadSafeIssueDemo {
         });
         threadPool2.shutdown();
         if (threadPool2.awaitTermination(1, TimeUnit.HOURS)) {
-            // 预期结果为1000，但是多次执行可以发现每次结果都不一样，说明非线程安全
+            // 预期结果为1000，线程安全
             System.out.println("------" + map2.get("key") + "------");
         }
     }
