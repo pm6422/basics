@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
@@ -16,6 +17,7 @@ public class ConcurrentHashMapThreadSafeIssueDemo {
     public static void main(String[] args) throws InterruptedException {
         ConcurrentHashMap<String, Integer> map1 = new ConcurrentHashMap<>();
         map1.put("key", 0);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
 
         ExecutorService threadPool1 = Executors.newFixedThreadPool(8);
         IntStream.range(0, 1000).forEach(i -> {
@@ -23,12 +25,16 @@ public class ConcurrentHashMapThreadSafeIssueDemo {
                 int key = map1.get("key") + 1; //step 1: single atomic operation is thread safe
                 map1.put("key", key); //step 2: single atomic operation is thread safe
                 // but two steps composition is not thread safe
+
+                atomicInteger.incrementAndGet();
             });
         });
         threadPool1.shutdown();
         if (threadPool1.awaitTermination(1, TimeUnit.HOURS)) {
             // 预期结果为1000，但是多次执行可以发现每次结果都不一样，说明非线程安全
             System.out.println("------" + map1.get("key") + "------");
+
+            System.out.println("AtomicInteger result: "+ atomicInteger.get());
         }
 
         ConcurrentHashMap<String, Integer> map2 = new ConcurrentHashMap<>();
